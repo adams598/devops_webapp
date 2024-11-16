@@ -1,7 +1,7 @@
 // backend/server.js
 const express = require("express");
 const app = express();
-const PORT = 5000;
+const PORT = 3001;
 
 // Endpoint API de test
 app.get("/api/message", (req, res) => {
@@ -10,6 +10,10 @@ app.get("/api/message", (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Backend démarré sur http://localhost:${PORT}`);
+// app.listen(PORT, () => {
+//   console.log(`Backend démarré sur http://localhost:${PORT}`);
+// });
+
+app.listen(3001, "0.0.0.0", () => {
+  console.log("Backend démarré sur http://localhost:3001");
 });

@@ -1,20 +1,36 @@
 pipeline {
     agent any
+
     stages {
         stage('Clone Repository') {
             steps {
-                echo 'Cloning the repository...'
                 checkout scm
             }
         }
-        stage('Build') {
+        stage('Build Backend Docker Image') {
             steps {
-                echo 'Building the application...'
+                dir('backend') {
+                    script {
+                        sh 'docker build -t backend-app .'
+                    }
+                }
             }
         }
-        stage('Test') {
+        stage('Build Frontend Docker Image') {
             steps {
-                echo 'Running tests...'
+                dir('frontend') {
+                    script {
+                        sh 'docker build -t frontend-app .'
+                    }
+                }
+            }
+        }
+        stage('Run Containers') {
+            steps {
+                script {
+                    sh 'docker run -d -p 3001:3001 backend-app'
+                    sh 'docker run -d -p 80:80 frontend-app'
+                }
             }
         }
     }
