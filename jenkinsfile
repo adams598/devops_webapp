@@ -2,35 +2,25 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
-                checkout scm
+                git 'https://github.com/adams598/devops_webapp.git'
             }
         }
-        stage('Build Backend Docker Image') {
+        stage('Build') {
             steps {
-                dir('backend') {
-                    script {
-                        bat 'docker build -t backend-app .'
-                    }
-                }
+                sh 'npm install'
             }
         }
-        stage('Build Frontend Docker Image') {
+        stage('Test') {
             steps {
-                dir('frontend') {
-                    script {
-                        bat 'docker build -t frontend-app .'
-                    }
-                }
+                sh 'npm test'
             }
         }
-        stage('Run Containers') {
+        stage('Deploy') {
             steps {
-                script {
-                    bat 'docker run -d -p 3001:3001 backend-app'
-                    bat 'docker run -d -p 80:80 frontend-app'
-                }
+                sh 'docker build -t backend-app .'
+                sh 'docker run -p 3001:3001 backend-app'
             }
         }
     }
