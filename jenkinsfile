@@ -11,11 +11,10 @@ pipeline {
             steps {
                 script {
                     echo 'Stopping all running containers...'
-                    bat '''for /F "tokens=*" %i IN ('docker ps -q') DO docker stop %i'''
+                    bat 'powershell -Command "& {docker ps -q | ForEach-Object {docker stop $_}}"'
 
                     echo 'Removing all containers...'
-                    bat '''for /F "tokens=*" %i IN ('docker ps -aq') DO docker rm %i'''
-
+                    bat 'powershell -Command "& {docker ps -aq | ForEach-Object {docker rm $_}}"'
                 }
             }
         }
