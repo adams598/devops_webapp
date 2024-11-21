@@ -11,13 +11,14 @@ pipeline {
             steps {
                 script {
                     echo 'Stopping all running containers...'
-                    bat 'for /F "tokens=*" %i IN (\'docker ps -q\') DO docker stop %i'
+                    bat 'for /F "tokens=*" %i IN (\'docker ps -q\') DO @docker stop %i'
 
                     echo 'Removing all containers...'
-                    bat 'for /F "tokens=*" %i IN (\'docker ps -aq\') DO docker rm %i'
+                    bat 'for /F "tokens=*" %i IN (\'docker ps -aq\') DO @docker rm %i'
                 }
             }
         }
+
         stage('Build Backend Docker Image') {
             steps {
                 dir('backend') {
