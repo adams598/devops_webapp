@@ -10,8 +10,11 @@ pipeline {
         stage('Cleanup') {
             steps {
                 script {
-                    bat 'docker stop $(docker ps -aq)'
-                    bat 'docker rm $(docker ps -aq)'
+                    echo 'Stopping all running containers...'
+                    bat 'for /F "tokens=*" %i IN (\'docker ps -q\') DO docker stop %i'
+
+                    echo 'Removing all containers...'
+                    bat 'for /F "tokens=*" %i IN (\'docker ps -aq\') DO docker rm %i'
                 }
             }
         }
