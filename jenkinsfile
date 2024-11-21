@@ -28,8 +28,8 @@ pipeline {
         stage('Run Containers') {
             steps {
                 script {
-                    bat 'docker run -d -p 3001:3001 backend-app'
-                    bat 'docker run -d -p 80:80 frontend-app'
+                    bat 'docker run -p 3001:3001 backend-app'
+                    bat 'docker run -p 80:80 frontend-app'
                 }
             }
         }
