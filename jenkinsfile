@@ -41,7 +41,7 @@ pipeline {
             steps {
                 script {
                     bat 'docker run -d -p 3001:3001 backend-app'
-                    bat 'docker run -d -p 80:80 frontend-app' // Utiliser le port 8080
+                    bat 'docker run -d -p 3000:3000 frontend-app' // Utiliser le port 8080
                 }
             }
         }
