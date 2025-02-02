@@ -22,8 +22,8 @@ FROM nginx:alpine
 # Copier les fichiers construits dans le répertoire nginx
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Exposer le port 80
-EXPOSE 80
+# Exposer le port 3000
+EXPOSE 3000
 
 # Démarrer le serveur nginx
 CMD ["nginx", "-g", "daemon off;"]
