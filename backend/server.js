@@ -7,7 +7,7 @@ const app = express();
 // Middleware pour le parsing JSON
 app.use(
   cors({
-    origin: "http://localhost:80", // Frontend autorisé
+    origin: ["http://localhost:3000", "http://localhost"], // Frontend autorisé
     methods: ["GET", "POST", "PUT", "DELETE"], // Méthodes autorisées
     credentials: false, // Si des cookies ou identifiants sont nécessaires
   })
